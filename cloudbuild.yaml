@@ -1,0 +1,14 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/sinuous-vent-406813/40a24dc7c546', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/sinuous-vent-406813/gcr.io/sinuous-vent-406813/happy_nation_games']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/sinuous-vent-406813/gcr.io/sinuous-vent-406813/happy_nation_games', '--region', 'europe-west1
+']
+images:
+- gcr.io/sinuous-vent-406813/gcr.io/sinuous-vent-406813/happy_nation_games
